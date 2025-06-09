@@ -10,16 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
 
 export default function TopBar() {
 	return (
 		<header className="row-start-1 row-end-2 grid grid-cols-2 items-center">
-			<Link href="#" className="col-start-1 text-xl font-semibold">
-				Intersection Density for Permutation Groups
-			</Link>
+			<a href="" className="col-start-1 text-xl font-semibold">Intersection Density for Transitive Permutation Groups</a>
 			<div className="flex col-start-2 gap-4 justify-self-end text-gray-600">
 				<Dialog>
 					<DialogTrigger asChild>
@@ -97,7 +92,7 @@ export default function TopBar() {
 								"I want you to expand your dataset to include..."
 							</div>
 							<div className="p-6">
-								Please contact Dr. Karen Meagher: <u>karen (dot) meagher (at) uregina (dot) ca </u>
+								Please contact Karen Meagher: <u>meagherk (at) uregina (dot) ca </u>
 							</div>
 						</div>
 						<div>
@@ -105,7 +100,7 @@ export default function TopBar() {
 								"This website is broken or is acting funny..."
 							</div>
 							<div className="p-6">
-								Sincerest apologies! Please contact Dr. Karen Meagher by email at the address
+								Sincerest apologies! Please contact Karen Meagher at the address
 								given above, and preferably CC Cody Solie: <u>codymsolie (at) gmail (dot) com</u>
 							</div>
 						</div>

@@ -1,205 +1,24 @@
 import Link from "next/link";
-import { Group, columns } from "./groups/columns"
+import { EKR_Data, ekr_columns } from "./groups/columns"
 import { DataTable } from "./groups/data-table"
 import TopBar from "./TopBar"
 
-async function getData(): Promise<Group[]> {
+
+async function getData(): Promise<EKR_Data[]> {
   // Fetch data from your API here.
-  return [
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    {
-      id: "1",
-      degree: 23,
-      gap_id: 47,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "4",
-      degree: 23,
-      gap_id: 50,
-      join: "yes",
-      union: "no",
-      neither: "no",
-    },
-    {
-      id: "2",
-      degree: 23,
-      gap_id: 48,
-      join: "no",
-      union: "yes",
-      neither: "no",
-    },
-    {
-      id: "3",
-      degree: 23,
-      gap_id: 49,
-      join: "no",
-      union: "no",
-      neither: "yes",
-    },
-    // ...
-  ]
+  const mariadb=require("mariadb")
+  const pool=mariadb.createPool({
+    host: "localhost",
+    user: "int_dens",
+    password: "dbpass",
+    database: "intersection_density",
+    connectionLimit: 5,
+  });
+
+  const get_statement = "Select * from Groups";
+  let conn = await pool.getConnection();
+  const rows = await conn.query(get_statement);
+  return rows;
 }
 
 export async function Groups() {
@@ -207,7 +26,7 @@ export async function Groups() {
 
   return (
     <div className="container w-full h-full mx-auto p-6 min-w-lg">
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={ekr_columns} data={data} />
     </div>
   )
 }
