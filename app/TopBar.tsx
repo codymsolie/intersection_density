@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -67,7 +65,7 @@ export default function TopBar() {
 								As of June 2025, we are working to complete our dataset for all of the 4952 
 								transitive groups with degree less than 24. If you have results for groups 
 								that are not actively listed on this webpage, please refer to the 
-								"Contact/Contribute" tab; we would love to add your results to our table!
+								&quot; Contact/Contribute &quot; tab; we would love to add your results to our table!
 							</div>
 						</div>
 						<DialogFooter>
