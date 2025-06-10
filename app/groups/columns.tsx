@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { DataTableColumnHeader } from "@/components/data-table-column-header.tsx"
+import { DataTableColumnHeader } from "@/components/data-table-column-header"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -19,7 +19,7 @@ export type EKR_Data = {
   name: string
   degree: number
   gap_id: number
-  order: bigint
+  size: bigint
   struc_desc: string
   int_dens_hi: number
   int_dens_lo: number
@@ -75,7 +75,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Upper Bound" />
     ),
     filterFn: (row, columnId, filterValue) => {
-      let value = row.getValue(columnId)
+      const value : string = row.getValue(columnId)
       return (+filterValue >= +value);
     },
   },
@@ -86,7 +86,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Lower Bound" />
     ),
     filterFn: (row, columnId, filterValue) => {
-      let value = row.getValue(columnId)
+      const value : string = row.getValue(columnId)
       return (+filterValue <= +value);
     },
   },
@@ -97,7 +97,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Intersection Density" />
     ),
     filterFn: (row, columnId, filterValue) => {
-      let value = row.getValue(columnId)
+      const value : string = row.getValue(columnId)
       return (+filterValue == +value);
     },
   },
@@ -248,7 +248,7 @@ export const group_columns: ColumnDef<Group>[] = [
     accessorKey: "join",
     header: () => <div className="font-semibold">Join</div>,
     cell: ({ row }) => {
-      const join = row.getValue("join")
+      const join : string = row.getValue("join")
       if(join == "yes") {
         return <div className="text-green-400">{join}</div>
       }
@@ -261,7 +261,7 @@ export const group_columns: ColumnDef<Group>[] = [
     accessorKey: "union",
     header: () => <div className="font-semibold">Union</div>,
     cell: ({ row }) => {
-      const union = row.getValue("union")
+      const union : string = row.getValue("union")
       if(union == "yes") {
         return <div className="text-green-400">{union}</div>
       }
@@ -274,7 +274,7 @@ export const group_columns: ColumnDef<Group>[] = [
     accessorKey: "neither",
     header: () => <div className="font-semibold">Neither</div>,
     cell: ({ row }) => {
-      const neither = row.getValue("neither")
+      const neither : string = row.getValue("neither")
       if(neither == "yes") {
         return <div className="text-green-400">{neither}</div>
       }

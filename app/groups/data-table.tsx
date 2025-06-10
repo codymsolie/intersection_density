@@ -17,13 +17,9 @@ import {
 
 import { DataTablePagination } from "@/components/data-table-pagination"
 
-import { Copy } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { Separator } from "@/components/ui/separator"
-import { RadioGroup, RadioGroupItem, RadioGroupIndicator } from "@/components/ui/radio-group"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 import {
   Table,
@@ -39,27 +35,15 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
-
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 
 import {
   Sheet,
@@ -106,6 +90,16 @@ export function DataTable<TData, TValue>({
     }
   })
 
+function filterGetter(col_name : string) {
+    const val = table?.getColumn(col_name)?.getFilterValue();
+    if(typeof val !== undefined) {
+      return val as string;
+    }
+    else {
+      return ""
+    }
+}
+
   return (
     <div>
       <div className="flex py-2 gap-4">
@@ -125,8 +119,7 @@ export function DataTable<TData, TValue>({
                 <div className="flex items-center gap-4">
                   <div>Degree</div>
                   <Select 
-                    id="degree"
-                    defaultValue={table.getColumn("degree")?.getFilterValue()}
+                    defaultValue={filterGetter("degree")}
                     onValueChange={(value) => {
                       if(value == "any") {
                         table.getColumn("degree")?.setFilterValue(null)
@@ -172,9 +165,9 @@ export function DataTable<TData, TValue>({
                   <Input 
                     id="gap_id" 
                     className="w-[80px]"
-                    value={table.getColumn("gap_id").getFilterValue() ?? ""}
+                    value={filterGetter("gap_id")}
                     onChange={(event) => {
-                      table.getColumn("gap_id").setFilterValue(event.target.value)
+                      table?.getColumn("gap_id")?.setFilterValue(event.target.value)
                     }}
                   />
                 </div>
@@ -184,9 +177,9 @@ export function DataTable<TData, TValue>({
                   <Input 
                     id="transitivity" 
                     className="w-[80px]"
-                    value={table.getColumn("transitivity").getFilterValue() ?? ""}
+                    value={filterGetter("transitivity")}
                     onChange={(event) => {
-                      table.getColumn("transitivity").setFilterValue(event.target.value)
+                      table?.getColumn("transitivity")?.setFilterValue(event.target.value)
                     }}
                   />
               </div>
@@ -196,31 +189,31 @@ export function DataTable<TData, TValue>({
                     <Input 
                       id="int_dens_hi" 
                       className="w-[80px]"
-                      value={table.getColumn("int_dens_hi").getFilterValue() ?? ""}
+                      value={filterGetter("int_dens_hi")}
                       onChange={(event) => {
-                        table.getColumn("int_dens_hi").setFilterValue(event.target.value)
+                        table?.getColumn("int_dens_hi")?.setFilterValue(event.target.value)
                       }}
                     />
                 </div>
                 <div className="flex p-4 items-center justify-between">
                     <div>Intersection Density</div>
                     <Input 
-                      id="int_dens_hi" 
+                      id="int_dens" 
                       className="w-[80px]"
-                      value={table.getColumn("int_dens").getFilterValue() ?? ""}
+                      value={filterGetter("int_dens")}
                       onChange={(event) => {
-                        table.getColumn("int_dens").setFilterValue(event.target.value)
+                        table?.getColumn("int_dens")?.setFilterValue(event.target.value)
                       }}
                     />
                 </div>
                 <div className="flex p-4 items-center justify-between">
                     <div>Lower Bound</div>
                     <Input 
-                      id="int_dens_hi" 
+                      id="int_dens_lo" 
                       className="w-[80px]"
-                      value={table.getColumn("int_dens_lo").getFilterValue() ?? ""}
+                      value={filterGetter("int_dens_lo")}
                       onChange={(event) => {
-                        table.getColumn("int_dens_lo").setFilterValue(event.target.value)
+                        table?.getColumn("int_dens_lo")?.setFilterValue(event.target.value)
                       }}
                     />
                 </div>
@@ -230,16 +223,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div>Minimally Transitive</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("min_trans").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("min_trans")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("min_trans").setFilterValue("1")
+                          table?.getColumn("min_trans")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("min_trans").setFilterValue("0")
+                          table?.getColumn("min_trans")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("min_trans").setFilterValue(null)
+                          table?.getColumn("min_trans")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -260,16 +253,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">Join</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("is_join").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("is_join")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("is_join").setFilterValue("1")
+                          table?.getColumn("is_join")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("is_join").setFilterValue("0")
+                          table?.getColumn("is_join")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("is_join").setFilterValue(null)
+                          table?.getColumn("is_join")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -290,16 +283,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">Complete Multipartite</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("is_cmp").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("is_cmp")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("is_cmp").setFilterValue("1")
+                          table?.getColumn("is_cmp")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("is_cmp").setFilterValue("0")
+                          table?.getColumn("is_cmp")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("is_cmp").setFilterValue(null)
+                          table?.getColumn("is_cmp")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -320,16 +313,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">EKR</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("ekr").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("ekr")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("ekr").setFilterValue("1")
+                          table?.getColumn("ekr")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("ekr").setFilterValue("0")
+                          table?.getColumn("ekr")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("ekr").setFilterValue(null)
+                          table?.getColumn("ekr")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -350,16 +343,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">Abelian</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("is_abelian").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("is_abelian")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("is_abelian").setFilterValue("1")
+                          table?.getColumn("is_abelian")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("is_abelian").setFilterValue("0")
+                          table?.getColumn("is_abelian")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("is_abelian").setFilterValue(null)
+                          table?.getColumn("is_abelian")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -380,16 +373,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">Nilpotent</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("is_nilpotent").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("is_nilpotent")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("is_nilpotent").setFilterValue("1")
+                          table?.getColumn("is_nilpotent")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("is_nilpotent").setFilterValue("0")
+                          table?.getColumn("is_nilpotent")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("is_nilpotent").setFilterValue(null)
+                          table?.getColumn("is_nilpotent")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -410,16 +403,16 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-between">
                     <div className="">Primitive</div>
                     <RadioGroup 
-                      defaultValue={table.getColumn("is_primitive").getFilterValue() ?? ""}
+                      defaultValue={filterGetter("is_primitive")}
                       onValueChange={ (value) => {
                         if(value == "1") {
-                          table.getColumn("is_primitive").setFilterValue("1")
+                          table?.getColumn("is_primitive")?.setFilterValue("1")
                         }
                         else if(value == "0") {
-                          table.getColumn("is_primitive").setFilterValue("0")
+                          table?.getColumn("is_primitive")?.setFilterValue("0")
                         }
                         else {
-                          table.getColumn("is_primitive").setFilterValue(null)
+                          table?.getColumn("is_primitive")?.setFilterValue(null)
                         }
                       }}
                     >
@@ -447,8 +440,8 @@ export function DataTable<TData, TValue>({
             variant="destructive"
             className="bg-red-400 hover:bg-red-500"
             onClick={() => {
-              table.resetColumnFilters()
-              table.resetSorting()
+              table?.resetColumnFilters()
+              table?.resetSorting()
             }}
           > 
             Reset filters

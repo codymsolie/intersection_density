@@ -24,12 +24,6 @@ export default function TopBar() {
 							<DialogDescription>
 							</DialogDescription>
 						</DialogHeader>
-						<div className="grid gap-4">
-							<div>
-							</div>
-							<div>
-							</div>
-						</div>
 						<DialogFooter>
 						</DialogFooter>
 					</DialogContent>
@@ -58,7 +52,7 @@ export default function TopBar() {
 							</div>
 							<div>
 								The work to fill out this dataset and build the UI was done 
-								by Cody Solie during NSERC USRA's in S/S 2024 and S/S 2025.
+								by Cody Solie during NSERC USRA&apos;s in S/S 2024 and S/S 2025.
 							</div>
 							<div className="text-lg font-semibold">Further Work</div>
 							<div>
@@ -84,10 +78,10 @@ export default function TopBar() {
 						</DialogHeader>
 						<div>
 							<div className="text-md font-semibold italic">
-								"I have new data to add to this website..."
+								&quot;I have new data to add to this website...&quot;
 							</div>
 							<div className="text-md font-semibold italic">
-								"I want you to expand your dataset to include..."
+								&quot;I want you to expand your dataset to include...&quot;
 							</div>
 							<div className="p-6">
 								Please contact Karen Meagher: <u>meagherk (at) uregina (dot) ca </u>
@@ -95,8 +89,8 @@ export default function TopBar() {
 						</div>
 						<div>
 							<div className="text-md font-semibold italic">
-								"This website is broken or is acting funny..."
-							</div>
+								&quot;This website is broken or is acting funny...&quot;
+							</div>A
 							<div className="p-6">
 								Sincerest apologies! Please contact Karen Meagher at the address
 								given above, and preferably CC Cody Solie: <u>codymsolie (at) gmail (dot) com</u>
