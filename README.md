@@ -1,20 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Intersection Density
 
-First, run the development server:
+A highly-searchable table of intersection density for 
+transitive permutation groups acting on sets of size 
+less than 24
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Domain name: `www.intersectiondensity.com`
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
