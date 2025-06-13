@@ -122,8 +122,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const min_trans = row.getValue("min_trans")
-      // our accessor functions change (bool) 1 to (string) "1"
-      if(min_trans == "1") {
+      if(min_trans) {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -140,8 +139,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const join = row.getValue("is_join")
-      // our accessor functions change (bool) 1 to (string) "1"
-      if(join == "1") {
+      if(join) {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -158,8 +156,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const cmp = row.getValue("is_cmp")
-      // our accessor functions change (bool) 1 to (string) "1"
-      if(cmp == "1") {
+      if(cmp) {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -196,7 +193,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const abel = row.getValue("is_abelian")
-      if(abel == "1") {
+      if(abel) {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -213,7 +210,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const nilp = row.getValue("is_nilpotent")
-      if(nilp == "1") {
+      if(nilp) {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -230,7 +227,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const prim = row.getValue("is_primitive")
-      if(prim == "1") {
+      if(prim) {
         return <div className="text-green-500">true</div>
       }
       else {
