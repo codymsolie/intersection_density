@@ -1,23 +1,15 @@
 import { EKR_Data, ekr_columns } from "./groups/columns";
 import { DataTable } from "./groups/data-table";
 import TopBar from "./TopBar";
-import * as mariadb from 'mariadb';
+import { neon } from '@neondatabase/serverless';
 
 
 async function getData(): Promise<EKR_Data[]> {
   // Fetch data from your API here.
-  const pool=mariadb.createPool({
-    host: "localhost",
-    user: "int_dens",
-    password: "dbpass",
-    database: "intersection_density",
-    connectionLimit: 5,
-  });
-
-  const get_statement = "Select * from Groups";
-  const conn = await pool.getConnection();
-  const rows = await conn.query(get_statement);
-  return rows;
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`SELECT * from ekr_data`;
+  const data = rows as unknown as EKR_Data[];
+  return data
 }
 
 async function Groups() {

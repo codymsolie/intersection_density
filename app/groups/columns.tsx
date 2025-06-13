@@ -28,7 +28,7 @@ export type EKR_Data = {
   min_trans: boolean
   is_join: boolean
   is_cmp: boolean
-  ekr: boolean
+  ekr: number
   is_abelian: boolean
   is_nilpotent: boolean
   is_primitive: boolean
@@ -42,7 +42,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Degree" />
     ),
     filterFn: "equalsString",
-    sortingFn: "text",
+    sortingFn: "alphanumeric",
   },
   {
     id: "gap_id",
@@ -51,7 +51,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Gap ID" />
     ),
     filterFn: "equalsString",
-    sortingFn: "text",
+    sortingFn: "alphanumeric",
   },
   {
     id: "size",
@@ -59,6 +59,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Order" />
     ),
+    sortingFn: "alphanumeric",
   },
   {
     id: "structure_description",
@@ -78,6 +79,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue >= +value);
     },
+    sortingFn: "alphanumeric",
   },
   {
     id: "int_dens_lo",
@@ -89,6 +91,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue <= +value);
     },
+    sortingFn: "alphanumeric",
   },
   {
     id: "int_dens",
@@ -100,6 +103,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue == +value);
     },
+    sortingFn: "alphanumeric",
   },
   {
     id: "transitivity",
@@ -108,6 +112,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Transitivity" />
     ),
     filterFn: "equalsString",
+    sortingFn: "alphanumeric",
   },
   {
     id: "min_trans",
@@ -174,8 +179,11 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       if(ekr == "1") {
         return <div className="text-green-500">true</div>
       }
-      else {
+      else if(ekr == "0") {
         return <div className="text-red-500">false</div>
+      }
+      else {
+        return <div className="text-gray-500">none</div>
       }
     },
     enableSorting: false,

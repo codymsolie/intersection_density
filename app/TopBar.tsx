@@ -90,7 +90,7 @@ export default function TopBar() {
 						<div>
 							<div className="text-md font-semibold italic">
 								&quot;This website is broken or is acting funny...&quot;
-							</div>A
+							</div>
 							<div className="p-6">
 								Sincerest apologies! Please contact Karen Meagher at the address
 								given above, and preferably CC Cody Solie: <u>codymsolie (at) gmail (dot) com</u>

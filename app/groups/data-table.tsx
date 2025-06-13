@@ -165,7 +165,7 @@ function filterGetter(col_name : string) {
                   <Input 
                     id="gap_id" 
                     className="w-[80px]"
-                    value={filterGetter("gap_id")}
+                    defaultValue={filterGetter("gap_id")}
                     onChange={(event) => {
                       table?.getColumn("gap_id")?.setFilterValue(event.target.value)
                     }}
@@ -321,6 +321,9 @@ function filterGetter(col_name : string) {
                         else if(value == "0") {
                           table?.getColumn("ekr")?.setFilterValue("0")
                         }
+                        else if(value == "-1") {
+                          table?.getColumn("ekr")?.setFilterValue("-1")
+                        }
                         else {
                           table?.getColumn("ekr")?.setFilterValue(null)
                         }
@@ -334,6 +337,9 @@ function filterGetter(col_name : string) {
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
                           value="0" id="ekr_false" />
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-gray-500 border-none rounded-[0.11rem]"
+                          value="-1" id="ekr_none" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="ekr_none" />
@@ -438,7 +444,7 @@ function filterGetter(col_name : string) {
         <div className="">
           <Button
             variant="destructive"
-            className="bg-red-400 hover:bg-red-500"
+            className="bg-red-500 hover:text-black"
             onClick={() => {
               table?.resetColumnFilters()
               table?.resetSorting()
