@@ -227,7 +227,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const prim = row.getValue("is_primitive")
-      if(prim) {
+      if(prim == true) {
         return <div className="text-green-500">true</div>
       }
       else {
