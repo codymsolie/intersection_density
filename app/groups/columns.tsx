@@ -26,8 +26,11 @@ export type EKR_Data = {
   int_dens: number
   transitivity: number
   min_trans: boolean
+  is_union: boolean
   is_join: boolean
   is_cmp: boolean
+  is_pm_join: boolean
+  is_cograph: boolean
   ekr: number
   is_abelian: boolean
   is_nilpotent: boolean
@@ -37,7 +40,7 @@ export type EKR_Data = {
 export const ekr_columns: ColumnDef<EKR_Data>[] = [
   {
     id: "degree",
-    accessorFn: row => `${row.degree.toString()}`,
+    accessorFn: row => `${row.degree?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Degree" />
     ),
@@ -46,7 +49,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "gap_id",
-    accessorFn: row => `${row.gap_id.toString()}`,
+    accessorFn: row => `${row.gap_id?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Gap ID" />
     ),
@@ -55,7 +58,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "size",
-    accessorFn: row => `${row.size.toString()}`,
+    accessorFn: row => `${row.size?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Order" />
     ),
@@ -71,7 +74,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "int_dens_hi",
-    accessorFn: row => `${row.int_dens_hi.toString()}`,
+    accessorFn: row => `${row.int_dens_hi?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Upper Bound" />
     ),
@@ -83,7 +86,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "int_dens_lo",
-    accessorFn: row => `${row.int_dens_lo.toString()}`,
+    accessorFn: row => `${row.int_dens_lo?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Lower Bound" />
     ),
@@ -95,7 +98,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "int_dens",
-    accessorFn: row => `${row.int_dens.toString()}`,
+    accessorFn: row => `${row.int_dens?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Intersection Density" />
     ),
@@ -107,7 +110,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "transitivity",
-    accessorFn: row => `${row.transitivity.toString()}`,
+    accessorFn: row => `${row.transitivity?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Transitivity" />
     ),
@@ -116,13 +119,13 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "min_trans",
-    accessorFn: row => `${row.min_trans.toString()}`,
+    accessorFn: row => `${row.min_trans?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Minimally Transitive" />
     ),
     cell: ({ row }) => {
       const min_trans = row.getValue("min_trans")
-      if(min_trans) {
+      if(min_trans == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -133,13 +136,13 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "is_join",
-    accessorFn: row => `${row.is_join.toString()}`,
+    accessorFn: row => `${row.is_join?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Join" />
     ),
     cell: ({ row }) => {
       const join = row.getValue("is_join")
-      if(join) {
+      if(join == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -150,13 +153,13 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "is_cmp",
-    accessorFn: row => `${row.is_cmp.toString()}`,
+    accessorFn: row => `${row.is_cmp?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Complete Multipartite" />
     ),
     cell: ({ row }) => {
       const cmp = row.getValue("is_cmp")
-      if(cmp) {
+      if(cmp == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -167,7 +170,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "ekr",
-    accessorFn: row => `${row.ekr.toString()}`,
+    accessorFn: row => `${row.ekr?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="EKR" />
     ),
@@ -187,13 +190,13 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "is_abelian",
-    accessorFn: row => `${row.is_abelian.toString()}`,
+    accessorFn: row => `${row.is_abelian?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Abelian" />
     ),
     cell: ({ row }) => {
       const abel = row.getValue("is_abelian")
-      if(abel) {
+      if(abel == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -204,13 +207,13 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "is_nilpotent",
-    accessorFn: row => `${row.is_nilpotent.toString()}`,
+    accessorFn: row => `${row.is_nilpotent?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Nilpotent" />
     ),
     cell: ({ row }) => {
       const nilp = row.getValue("is_nilpotent")
-      if(nilp) {
+      if(nilp == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -221,13 +224,64 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
   },
   {
     id: "is_primitive",
-    accessorFn: row => `${row.is_primitive.toString()}`,
+    accessorFn: row => `${row.is_primitive?.toString()}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Primitive" />
     ),
     cell: ({ row }) => {
       const prim = row.getValue("is_primitive")
-      if(prim == true) {
+      if(prim == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
+    id: "is_union",
+    accessorFn: row => `${row.is_union?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Union" />
+    ),
+    cell: ({ row }) => {
+      const union = row.getValue("is_union")
+      if(union == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
+    id: "is_pm_join",
+    accessorFn: row => `${row.is_pm_join?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="PM Join" />
+    ),
+    cell: ({ row }) => {
+      const pm_join = row.getValue("is_pm_join")
+      if(pm_join == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
+    id: "is_cograph",
+    accessorFn: row => `${row.is_cograph?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Cograph" />
+    ),
+    cell: ({ row }) => {
+      const cograph = row.getValue("is_cograph")
+      if(cograph == "true") {
         return <div className="text-green-500">true</div>
       }
       else {

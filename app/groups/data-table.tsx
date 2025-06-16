@@ -177,7 +177,7 @@ function filterGetter(col_name : string) {
                   <Input 
                     id="transitivity" 
                     className="w-[80px]"
-                    value={filterGetter("transitivity")}
+                    defaultValue={filterGetter("transitivity")}
                     onChange={(event) => {
                       table?.getColumn("transitivity")?.setFilterValue(event.target.value)
                     }}
@@ -189,7 +189,7 @@ function filterGetter(col_name : string) {
                     <Input 
                       id="int_dens_hi" 
                       className="w-[80px]"
-                      value={filterGetter("int_dens_hi")}
+                      defaultValue={filterGetter("int_dens_hi")}
                       onChange={(event) => {
                         table?.getColumn("int_dens_hi")?.setFilterValue(event.target.value)
                       }}
@@ -200,7 +200,7 @@ function filterGetter(col_name : string) {
                     <Input 
                       id="int_dens" 
                       className="w-[80px]"
-                      value={filterGetter("int_dens")}
+                      defaultValue={filterGetter("int_dens")}
                       onChange={(event) => {
                         table?.getColumn("int_dens")?.setFilterValue(event.target.value)
                       }}
@@ -211,7 +211,7 @@ function filterGetter(col_name : string) {
                     <Input 
                       id="int_dens_lo" 
                       className="w-[80px]"
-                      value={filterGetter("int_dens_lo")}
+                      defaultValue={filterGetter("int_dens_lo")}
                       onChange={(event) => {
                         table?.getColumn("int_dens_lo")?.setFilterValue(event.target.value)
                       }}
@@ -225,11 +225,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("min_trans")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("min_trans")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("min_trans")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("min_trans")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("min_trans")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("min_trans")?.setFilterValue(null)
@@ -239,14 +239,44 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className="shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="min_trans_true" >
+                          value="true" id="min_trans_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className="shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="min_trans_false" />
+                          value="false" id="min_trans_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="min_trans_none" />
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="">Union</div>
+                    <RadioGroup 
+                      defaultValue={filterGetter("is_union")}
+                      onValueChange={ (value) => {
+                        if(value == "true") {
+                          table?.getColumn("is_union")?.setFilterValue("true")
+                        }
+                        else if(value == "false") {
+                          table?.getColumn("is_union")?.setFilterValue("false")
+                        }
+                        else {
+                          table?.getColumn("is_union")?.setFilterValue(null)
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
+                          value="true" id="is_union_true" >
+                        </RadioGroupItem>
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
+                          value="false" id="is_union_false" />
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
+                          value="" id="is_union_none" />
                       </div>
                     </RadioGroup>
                   </div>
@@ -255,11 +285,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("is_join")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("is_join")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("is_join")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("is_join")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("is_join")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("is_join")?.setFilterValue(null)
@@ -269,11 +299,11 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="is_join_true" >
+                          value="true" id="is_join_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="is_join_false" />
+                          value="false" id="is_join_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="is_join_none" />
@@ -285,11 +315,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("is_cmp")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("is_cmp")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("is_cmp")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("is_cmp")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("is_cmp")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("is_cmp")?.setFilterValue(null)
@@ -299,14 +329,74 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="is_cmp_true" >
+                          value="true" id="is_cmp_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="is_cmp_false" />
+                          value="false" id="is_cmp_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="is_cmp_none" />
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="">PM Join</div>
+                    <RadioGroup 
+                      defaultValue={filterGetter("is_pm_join")}
+                      onValueChange={ (value) => {
+                        if(value == "true") {
+                          table?.getColumn("is_pm_join")?.setFilterValue("true")
+                        }
+                        else if(value == "false") {
+                          table?.getColumn("is_pm_join")?.setFilterValue("false")
+                        }
+                        else {
+                          table?.getColumn("is_pm_join")?.setFilterValue(null)
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
+                          value="true" id="is_pm_join_true" >
+                        </RadioGroupItem>
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
+                          value="false" id="is_pm_join_false" />
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
+                          value="" id="is_pm_join_none" />
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="">Cograph</div>
+                    <RadioGroup 
+                      defaultValue={filterGetter("is_cograph")}
+                      onValueChange={ (value) => {
+                        if(value == "true") {
+                          table?.getColumn("is_cograph")?.setFilterValue("true")
+                        }
+                        else if(value == "false") {
+                          table?.getColumn("is_cograph")?.setFilterValue("false")
+                        }
+                        else {
+                          table?.getColumn("is_cograph")?.setFilterValue(null)
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
+                          value="true" id="is_cograph_true" >
+                        </RadioGroupItem>
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
+                          value="false" id="is_cograph_false" />
+                        <RadioGroupItem 
+                          className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
+                          value="" id="is_cograph_none" />
                       </div>
                     </RadioGroup>
                   </div>
@@ -351,11 +441,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("is_abelian")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("is_abelian")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("is_abelian")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("is_abelian")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("is_abelian")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("is_abelian")?.setFilterValue(null)
@@ -365,11 +455,11 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="is_abelian_true" >
+                          value="true" id="is_abelian_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="is_abelian_false" />
+                          value="false" id="is_abelian_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="is_abelian_none" />
@@ -381,11 +471,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("is_nilpotent")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("is_nilpotent")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("is_nilpotent")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("is_nilpotent")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("is_nilpotent")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("is_nilpotent")?.setFilterValue(null)
@@ -395,11 +485,11 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="is_nilpotent_true" >
+                          value="true" id="is_nilpotent_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="is_nilpotent_false" />
+                          value="false" id="is_nilpotent_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="is_nilpotent_none" />
@@ -411,11 +501,11 @@ function filterGetter(col_name : string) {
                     <RadioGroup 
                       defaultValue={filterGetter("is_primitive")}
                       onValueChange={ (value) => {
-                        if(value == "1") {
-                          table?.getColumn("is_primitive")?.setFilterValue("1")
+                        if(value == "true") {
+                          table?.getColumn("is_primitive")?.setFilterValue("true")
                         }
-                        else if(value == "0") {
-                          table?.getColumn("is_primitive")?.setFilterValue("0")
+                        else if(value == "false") {
+                          table?.getColumn("is_primitive")?.setFilterValue("false")
                         }
                         else {
                           table?.getColumn("is_primitive")?.setFilterValue(null)
@@ -425,11 +515,11 @@ function filterGetter(col_name : string) {
                       <div className="flex items-center gap-2">
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-green-500 border-none rounded-[0.11rem]"
-                          value="1" id="is_primitive_true" >
+                          value="true" id="is_primitive_true" >
                         </RadioGroupItem>
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-red-500 border-none rounded-[0.11rem]"
-                          value="0" id="is_primitive_false" />
+                          value="false" id="is_primitive_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="is_primitive_none" />
