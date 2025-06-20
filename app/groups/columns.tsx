@@ -9,7 +9,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -305,6 +304,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const eigenvalues = row.original.eigenvalues
+      eigenvalues?.sort((a, b) => a.eigenvalue < b.eigenvalue ? 1 : a.eigenvalue > b.eigenvalue ? -1 : 0)
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -313,9 +313,14 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="justify-center items-center" sticky="always" align="center">
-            <div className="font-medium">Transitive group {row.original.gap_id} of degree {row.original.degree}</div>
-              {eigenvalues?.map(e => <div key={e?.evalue_id}>({e?.eigenvalue}, {e?.multiplicity})</div>)}
+          <PopoverContent className="w-80" sticky="always" align="center">
+            <div className="grid gap-2">
+              <div className="font-semibold">Transitive group {row.original.gap_id} of degree {row.original.degree}</div>
+              <p>Eigenvalues of the derangement graph: (eigenvalue, multiplicity)</p>
+              <ul>
+                {eigenvalues?.map(e => ( <li className="col-span-0" key={e?.evalue_id}>({e?.eigenvalue}, {e?.multiplicity})</li>))}
+              </ul>
+            </div>
           </PopoverContent>
         </Popover>
       )
