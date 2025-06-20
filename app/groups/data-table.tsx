@@ -534,13 +534,13 @@ function filterGetter(col_name : string) {
         <div className="">
           <Button
             variant="destructive"
-            className="bg-red-500 hover:text-black"
+            className="bg-red-500 hover:text-gray-100"
             onClick={() => {
               table?.resetColumnFilters()
               table?.resetSorting()
             }}
           > 
-            Reset filters
+            Reset Filters
           </Button>
         </div>
         <DropdownMenu>

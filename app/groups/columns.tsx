@@ -1,17 +1,23 @@
-"use client"
+'use client';
 
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "@/components/data-table-column-header"
+import { MoreHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Group = {
-  id: number
-  degree: number
-  gap_id: number
-  join: "yes" | "no"
-  union: "yes" | "no"
-  neither: "yes" | "no"
+
+export type Eigenvalue = {
+  evalue_id: number
+  group_id: number
+  eigenvalue: number
+  multiplicity: number
 }
 
 export type EKR_Data = {
@@ -35,7 +41,9 @@ export type EKR_Data = {
   is_abelian: boolean
   is_nilpotent: boolean
   is_primitive: boolean
+  eigenvalues?: Eigenvalue[]
 }
+
 
 export const ekr_columns: ColumnDef<EKR_Data>[] = [
   {
@@ -135,6 +143,23 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     enableSorting: false,
   },
   {
+    id: "is_union",
+    accessorFn: row => `${row.is_union?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Union" />
+    ),
+    cell: ({ row }) => {
+      const union = row.getValue("is_union")
+      if(union == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
     id: "is_join",
     accessorFn: row => `${row.is_join?.toString()}`,
     header: ({ column }) => (
@@ -160,6 +185,40 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     cell: ({ row }) => {
       const cmp = row.getValue("is_cmp")
       if(cmp == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
+    id: "is_pm_join",
+    accessorFn: row => `${row.is_pm_join?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="PM Join" />
+    ),
+    cell: ({ row }) => {
+      const pm_join = row.getValue("is_pm_join")
+      if(pm_join == "true") {
+        return <div className="text-green-500">true</div>
+      }
+      else {
+        return <div className="text-red-500">false</div>
+      }
+    },
+    enableSorting: false,
+  },
+  {
+    id: "is_cograph",
+    accessorFn: row => `${row.is_cograph?.toString()}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Cograph" />
+    ),
+    cell: ({ row }) => {
+      const cograph = row.getValue("is_cograph")
+      if(cograph == "true") {
         return <div className="text-green-500">true</div>
       }
       else {
@@ -240,106 +299,27 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     enableSorting: false,
   },
   {
-    id: "is_union",
-    accessorFn: row => `${row.is_union?.toString()}`,
+    id: "eigenvalues",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Union" />
+      <DataTableColumnHeader column={column} title="Eigenvalues" />
     ),
     cell: ({ row }) => {
-      const union = row.getValue("is_union")
-      if(union == "true") {
-        return <div className="text-green-500">true</div>
-      }
-      else {
-        return <div className="text-red-500">false</div>
-      }
+      const eigenvalues = row.original.eigenvalues
+      return (
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">See Eigenvalues</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="justify-center items-center" sticky="always" align="center">
+            <div className="font-medium">Transitive group {row.original.gap_id} of degree {row.original.degree}</div>
+              {eigenvalues?.map(e => <div key={e?.evalue_id}>({e?.eigenvalue}, {e?.multiplicity})</div>)}
+          </PopoverContent>
+        </Popover>
+      )
     },
     enableSorting: false,
-  },
-  {
-    id: "is_pm_join",
-    accessorFn: row => `${row.is_pm_join?.toString()}`,
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="PM Join" />
-    ),
-    cell: ({ row }) => {
-      const pm_join = row.getValue("is_pm_join")
-      if(pm_join == "true") {
-        return <div className="text-green-500">true</div>
-      }
-      else {
-        return <div className="text-red-500">false</div>
-      }
-    },
-    enableSorting: false,
-  },
-  {
-    id: "is_cograph",
-    accessorFn: row => `${row.is_cograph?.toString()}`,
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Cograph" />
-    ),
-    cell: ({ row }) => {
-      const cograph = row.getValue("is_cograph")
-      if(cograph == "true") {
-        return <div className="text-green-500">true</div>
-      }
-      else {
-        return <div className="text-red-500">false</div>
-      }
-    },
-    enableSorting: false,
-  },
-]
-
-export const group_columns: ColumnDef<Group>[] = [
-  {
-    id: "degree",
-    accessorFn: row => `${row.degree.toString()}`,
-    header: () => <div className="font-semibold">Degree</div>,
-  },
-  {
-    id: "gap_id",
-    accessorFn: row => `${row.gap_id.toString()}`,
-    header: () => <div className="font-semibold">Gap ID</div>,
-  },
-  {
-    accessorKey: "join",
-    header: () => <div className="font-semibold">Join</div>,
-    cell: ({ row }) => {
-      const join : string = row.getValue("join")
-      if(join == "yes") {
-        return <div className="text-green-400">{join}</div>
-      }
-      else {
-        return <div className="text-red-400">{join}</div>
-      }
-    },
-  },
-  {
-    accessorKey: "union",
-    header: () => <div className="font-semibold">Union</div>,
-    cell: ({ row }) => {
-      const union : string = row.getValue("union")
-      if(union == "yes") {
-        return <div className="text-green-400">{union}</div>
-      }
-      else {
-        return <div className="text-red-400">{union}</div>
-      }
-    },
-  },
-  {
-    accessorKey: "neither",
-    header: () => <div className="font-semibold">Neither</div>,
-    cell: ({ row }) => {
-      const neither : string = row.getValue("neither")
-      if(neither == "yes") {
-        return <div className="text-green-400">{neither}</div>
-      }
-      else {
-        return <div className="text-red-400">{neither}</div>
-      }
-    },
   },
 ]
