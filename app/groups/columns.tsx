@@ -90,7 +90,6 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue >= +value);
     },
-    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -103,7 +102,6 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue <= +value);
     },
-    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -116,7 +114,6 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue == +value);
     },
-    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
