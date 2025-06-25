@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -14,20 +15,9 @@ export default function TopBar() {
 		<header className="row-start-1 row-end-2 grid grid-cols-2 items-center">
 			<a href="" className="col-start-1 text-xl font-semibold">Intersection Density for Transitive Permutation Groups</a>
 			<div className="flex col-start-2 gap-4 justify-self-end text-gray-600">
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button variant="ghost">Background</Button>
-					</DialogTrigger>
-					<DialogContent className="sm:max-w-[425px]">
-						<DialogHeader>
-							<DialogTitle>Background</DialogTitle>
-							<DialogDescription>
-							</DialogDescription>
-						</DialogHeader>
-						<DialogFooter>
-						</DialogFooter>
-					</DialogContent>
-				</Dialog>
+				<Button variant="ghost" asChild>
+					<Link href="background.pdf">Background</Link>
+				</Button>
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button variant="ghost">About | Further Work</Button>
@@ -52,7 +42,9 @@ export default function TopBar() {
 							</div>
 							<div>
 								The work to fill out this dataset and build the UI was done 
-								by Cody Solie during NSERC USRA&apos;s in S/S 2024 and S/S 2025.
+								by Cody Solie during NSERC USRA&apos;s in S/S 2024 and S/S 2025,
+								under the supervision of Dr. Karen Meagher.
+
 							</div>
 							<div className="text-lg font-semibold">Further Work</div>
 							<div>
