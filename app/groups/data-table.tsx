@@ -429,7 +429,7 @@ function filterGetter(col_name : string) {
                           value="0" id="ekr_false" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-gray-500 border-none rounded-[0.11rem]"
-                          value="-1" id="ekr_none" />
+                          value="-1" id="ekr_unknown" />
                         <RadioGroupItem 
                           className=" shrink-0 w-4 h-4 bg-white rounded-[0.11rem]"
                           value="" id="ekr_none" />

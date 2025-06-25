@@ -69,6 +69,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Order" />
     ),
+    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -89,6 +90,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue >= +value);
     },
+    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -101,6 +103,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue <= +value);
     },
+    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -113,6 +116,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       const value : string = row.getValue(columnId)
       return (+filterValue == +value);
     },
+    filterFn: "equalsString",
     sortingFn: "alphanumeric",
   },
   {
@@ -244,6 +248,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
         return <div className="text-gray-500">none</div>
       }
     },
+    filterFn: "equalsString",
     enableSorting: false,
   },
   {
