@@ -9,6 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { ScrollArea } from "@/components/ui/scroll-area"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -315,14 +316,14 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80" sticky="always" align="center">
-            <div className="grid gap-2">
-              <div className="font-semibold">Transitive group {row.original.gap_id} of degree {row.original.degree}</div>
-              <p>Eigenvalues of the derangement graph: (eigenvalue, multiplicity)</p>
+          <PopoverContent className="w-80 max-h-80" sticky="always" align="center">
+            <p className="mb-2 font-semibold">Transitive group {row.original.gap_id} of degree {row.original.degree}</p>
+            <p className="mb-2">(eigenvalue, multiplicity)</p>
+            <ScrollArea className="flex max-h-50 flex-col mb-2" type="always">
               <ul>
                 {eigenvalues?.map(e => ( <li className="col-span-0" key={e?.evalue_id}>({e?.eigenvalue}, {e?.multiplicity})</li>))}
               </ul>
-            </div>
+            </ScrollArea>
           </PopoverContent>
         </Popover>
       )
