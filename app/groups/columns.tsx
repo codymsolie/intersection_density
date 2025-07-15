@@ -41,6 +41,7 @@ export type EKR_Data = {
   is_abelian: boolean
   is_nilpotent: boolean
   is_primitive: boolean
+  stab_desc: string
   eigenvalues?: Eigenvalue[]
 }
 
@@ -78,6 +79,14 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     accessorFn: row => `${row.struc_desc}`,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Structure Description" />
+    ),
+    enableSorting: false,
+  },
+  {
+    id: "stabilizer_description",
+    accessorFn: row => `${row.stab_desc}`,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Stabilizer Description" />
     ),
     enableSorting: false,
   },
