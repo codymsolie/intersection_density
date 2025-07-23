@@ -316,7 +316,7 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
     ),
     cell: ({ row }) => {
       const eigenvalues = row.original.eigenvalues
-      eigenvalues?.sort((a, b) => a.eigenvalue < b.eigenvalue ? 1 : a.eigenvalue > b.eigenvalue ? -1 : 0)
+      eigenvalues?.sort((a : bigint, b : bigint) => BigInt(a.eigenvalue)< BigInt(b.eigenvalue) ? 1 : BigInt(a.eigenvalue) > BigInt(b.eigenvalue) ? -1 : 0)
       return (
         <Popover>
           <PopoverTrigger asChild>
