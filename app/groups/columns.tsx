@@ -16,8 +16,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 export type Eigenvalue = {
   evalue_id: number
   group_id: number
-  eigenvalue: number
-  multiplicity: number
+  eigenvalue: bigint
+  multiplicity: bigint 
 }
 
 export type EKR_Data = {
