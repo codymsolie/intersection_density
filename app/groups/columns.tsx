@@ -20,6 +20,12 @@ export type Eigenvalue = {
   multiplicity: bigint 
 }
 
+export type Reason = {
+  reason_id: number
+  group_id: number
+  reason: string
+}
+
 export type EKR_Data = {
   group_id: number
   name: string
@@ -42,6 +48,7 @@ export type EKR_Data = {
   is_nilpotent: boolean
   is_primitive: boolean
   stab_desc: string
+  reasons?: Reason[]
   eigenvalues?: Eigenvalue[]
 }
 
@@ -331,6 +338,35 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
             <ScrollArea className="flex max-h-50 flex-col mb-2" type="always">
               <ul>
                 {eigenvalues?.map(e => ( <li className="col-span-0" key={e?.evalue_id}>({e?.eigenvalue}, {e?.multiplicity})</li>))}
+              </ul>
+            </ScrollArea>
+          </PopoverContent>
+        </Popover>
+      )
+    },
+    enableSorting: false,
+  },
+  {
+    id: "reasons",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Reasons" />
+    ),
+    cell: ({ row }) => {
+      const reasons = row.original.reasons
+      return (
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">See Reasons</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 max-h-80" sticky="always" align="center">
+            <p className="mb-2 font-semibold">Transitive group {row.original.gap_id} of degree {row.original.degree}</p>
+            <p className="mb-4">Reasons for intersection density:</p>
+            <ScrollArea className="flex max-h-50 flex-col mb-2" type="always">
+              <ul>
+                {reasons?.map(r => ( <li className="col-span-0" key={r?.reason_id}>{r?.reason}</li>))}
               </ul>
             </ScrollArea>
           </PopoverContent>
