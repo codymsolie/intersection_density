@@ -1,4 +1,4 @@
-import { EKR_Data, ekr_columns, Eigenvalue } from "./groups/columns";
+import { EKR_Data, ekr_columns, Eigenvalue, Reason } from "./groups/columns";
 import { DataTable } from "./groups/data-table";
 import TopBar from "./TopBar";
 import { neon } from '@neondatabase/serverless';
@@ -20,12 +20,22 @@ async function getEvalues(): Promise<Eigenvalue[]> {
   return evalues 
 }
 
+async function getReasons(): Promise<Reason[]> {
+  const r = await sql`SELECT * from reasons`;
+  // get results into proper type format (must go to unknown first as formality)
+  const reasons = r as unknown as Reason[];
+  return reasons
+}
+
 async function Groups() {
   const groups = await getGroups()
   const ev = await getEvalues()
+  const re = await getReasons()
   for (const group of groups) {
     const evalues = ev.filter(eigenvalue => eigenvalue.group_id == group.group_id)
+    const reasons = re.filter(reason => reason.group_id == group.group_id)
     group.eigenvalues = evalues;
+    group.reasons = reasons
   }
   return (
       <div className="container w-full h-full mx-auto p-6 min-w-lg">
