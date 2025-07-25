@@ -52,7 +52,6 @@ export type EKR_Data = {
   eigenvalues?: Eigenvalue[]
 }
 
-
 export const ekr_columns: ColumnDef<EKR_Data>[] = [
   {
     id: "degree",
@@ -128,8 +127,8 @@ export const ekr_columns: ColumnDef<EKR_Data>[] = [
       <DataTableColumnHeader column={column} title="Intersection Density" />
     ),
     filterFn: (row, columnId, filterValue) => {
-      const value : string = row.getValue(columnId)
-      return (+filterValue == +value);
+        const value : string = row.getValue(columnId)
+        return (+filterValue == +value);
     },
     sortingFn: "alphanumeric",
   },
