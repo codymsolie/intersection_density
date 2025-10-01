@@ -44,7 +44,7 @@ export default function TopBar() {
 								The work to fill out this dataset and build the UI was done 
 								by Cody Solie during NSERC USRA&apos;s in S/S 2024 and S/S 2025,
 								under the supervision of Dr. Karen Meagher. Data collection 
-                                scripts are based on work done previously by Cody Antal.
+                                scripts are based on work done previously by Cody Antal. 
 
 							</div>
 							<div className="text-lg font-semibold">Further Work</div>
