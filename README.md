@@ -6,7 +6,7 @@ A highly-searchable table of intersection density for
 transitive permutation groups acting on sets of size 
 less than 24
 
-Domain name: www.intersectiondensity.com
+Domain name: intersection-density.vercel.app
 
 ## Learn
 
